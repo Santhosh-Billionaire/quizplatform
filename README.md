@@ -1,4 +1,4 @@
-```markdown
+
 # 🧠 QuizPlatform — AI-Powered Book-to-Quiz Generator
 
 ![QuizPlatform Banner](https://img.shields.io/badge/AI%20Quiz%20App-Powered%20by%20Gemini-blueviolet)

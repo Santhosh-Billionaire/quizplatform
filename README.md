@@ -1,195 +1,208 @@
 
+
 # 🧠 QuizPlatform — AI-Powered Book-to-Quiz Generator
 
 ![QuizPlatform Banner](https://img.shields.io/badge/AI%20Quiz%20App-Powered%20by%20Gemini-blueviolet)
 
-QuizPlatform is an AI-driven web application that converts **uploaded books or study material** into interactive quizzes with real-time scoring, topic tagging, and difficulty management. Built using **React**, **Node.js**, and **Supabase**, this project is ideal for learners, educators, and edtech startups.
+**QuizPlatform** is an AI-powered web app that transforms uploaded **PDF books** into interactive quizzes in seconds. Built with **React**, **Node.js**, **Supabase**, and **Gemini Pro**, this platform is ideal for learners, educators, and edtech startups to test comprehension instantly.
+
+---
+
+## 📸 Demo Screens
+
+### 📥 Upload Book
+
+![Upload Book](./frontend/public/screenshots/upload-book.png)
+
+### ⚙️ Quiz Setup
+
+![Quiz Setup](./frontend/public/screenshots/quiz-setup.png)
+
+### 🔢 Difficulty & Time Settings
+
+![Difficulty Selection](./frontend/public/screenshots/difficulty-setting.png)
+
+### 🧪 Live Quiz
+
+![Question UI](./frontend/public/screenshots/question-ui.png)
+
+### 📊 Quiz Results
+
+![Result UI](./frontend/public/screenshots/result-ui.png)
 
 ---
 
 ## 🚀 Features
 
-- 📚 **Upload PDF Books**
-- 🤖 **AI-Generated MCQs** from Book Content (via Gemini/OpenAI)
-- 🧩 **Topic-Wise Question Grouping**
-- ⚙️ **Difficulty Selection** (`easy`, `medium`, `hard`)
-- 📊 **Real-Time Scoring & Performance Dashboard**
-- 📥 **PDF Report Generation**
-- 🌐 **API-Ready Design** (for plugin/extension integration)
-- 🧠 **Adaptive Quizzing Logic (Coming Soon)**
+* 📚 Upload PDFs and extract content
+* 🤖 Gemini Pro AI generates MCQs from context
+* 🧠 Topic-wise grouping & difficulty control
+* ⚙️ Quiz setup: topic, time, difficulty
+* 📊 Real-time score tracking
+* 📥 PDF report generation
+* 📈 Dashboard with performance metrics
+* 🔌 API-based design (easy plugin embedding)
 
 ---
 
 ## 🧑‍💻 Tech Stack
 
-| Layer       | Tech                          |
-| ----------- | ----------------------------- |
-| Frontend    | React, Axios, React Router    |
-| Backend     | Node.js, Express, Multer, PDF-Parse |
-| Database    | Supabase (PostgreSQL + Storage) |
-| AI Layer    | Gemini 1.5 Pro (via REST API) |
-| Styling     | CSS Modules / Tailwind (optional) |
-| File Upload | Multer + Supabase Storage     |
-| Reporting   | PDFKit                        |
+| Layer     | Technology                             |
+| --------- | -------------------------------------- |
+| Frontend  | React, Tailwind CSS, Axios             |
+| Backend   | Node.js, Express.js, Multer, PDF-Parse |
+| AI Layer  | Gemini 1.5 Flash API                   |
+| Database  | Supabase (PostgreSQL + Storage)        |
+| Uploads   | Multer + Supabase Storage              |
+| Reporting | PDFKit                                 |
 
 ---
 
-## 📂 Folder Structure
+## 📁 Folder Structure
 
 ```
-
 quiz/
-├── backend/          # Express + Supabase + AI logic
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── routes/
-│   │   └── utils/
-│   ├── .env
-│   └── server.js
-├── frontend/         # React Frontend
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   └── api/
-│   ├── .env
+├── backend/
+│   ├── src/                # Express backend
+│   └── .env                # Supabase + Gemini keys
+├── frontend/
+│   ├── src/                # React App
+│   ├── public/screenshots  # UI image references
 │   └── App.js
-├── database/         # SQL schema snapshots
-├── .gitignore
-└── README.md
-
-````
+├── database/               # SQL schema
+├── README.md
+```
 
 ---
 
-## 🧱 Database Schema (PostgreSQL via Supabase)
+## 🧠 Database Design (Supabase PostgreSQL)
 
 ### `books`
-| Field      | Type    | Description               |
-|------------|---------|---------------------------|
-| id         | uuid    | Primary Key               |
-| title      | text    | Book Title                |
-| file_url   | text    | Supabase file storage URL |
-| raw_text   | text    | Extracted book content    |
-| created_at | timestamp | Upload time             |
+
+| Field     | Type | Description              |
+| --------- | ---- | ------------------------ |
+| id        | UUID | Primary key              |
+| title     | TEXT | Book title               |
+| file\_url | TEXT | Supabase file URL        |
+| raw\_text | TEXT | Extracted text from book |
 
 ### `questions`
-| Field      | Type    | Description               |
-|------------|---------|---------------------------|
-| id         | uuid    | Primary Key               |
-| book_id    | uuid    | Foreign Key to books      |
-| question   | text    | MCQ                       |
-| options    | jsonb   | JSON of 4 options         |
-| answer     | text    | Correct answer key        |
-| topic_id   | uuid    | Foreign key to topic      |
-| difficulty | text    | `easy` / `medium` / `hard`|
 
-### `quizzes`, `responses`, `topics`
-Check the [Schema Docs](./database/) for full specs.
+| Field      | Type  | Description              |
+| ---------- | ----- | ------------------------ |
+| id         | UUID  | Primary key              |
+| book\_id   | UUID  | FK → `books.id`          |
+| question   | TEXT  | Question                 |
+| options    | JSONB | 4-option array           |
+| answer     | TEXT  | Correct answer           |
+| topic\_id  | UUID  | FK → `topics.id`         |
+| difficulty | TEXT  | `easy`, `medium`, `hard` |
 
 ---
 
 ## 🔄 User Flow
 
-1. **User uploads a book (PDF)**
-2. **Backend parses PDF using `pdf-parse`**
-3. **Gemini API generates questions with answers**
-4. **Questions are categorized by topic & difficulty**
-5. **User selects topics/difficulty to start a quiz**
-6. **Frontend renders MCQs; answers are submitted**
-7. **Backend scores and stores responses**
-8. **Performance shown via dashboard & PDF reports**
+1. 📥 **Upload PDF Book**
+2. 📄 **Extract Text (pdf-parse)**
+3. 🤖 **Generate Questions (Gemini API)**
+4. 🧩 **Categorize by Topic & Difficulty**
+5. ⚙️ **Quiz Setup UI (User selects options)**
+6. 🧪 **User Takes Quiz**
+7. 📊 **Score Calculated & Stored**
+8. 📤 **PDF/Result Dashboard Shown**
 
 ---
 
-## 🧩 Plugin/Extension Use Case
+## 🧩 Plugin or Integration Use Case
 
-QuizPlatform is built with a **modular API-first design**, enabling it to be embedded or integrated into:
+**QuizPlatform** is API-first and can be embedded or used as:
 
-- 📘 E-learning platforms (Moodle, Teachable, Canvas)
-- 🏫 School/College portals
-- 🧠 LMS dashboards or CMS systems
-- 🌐 Any React/Vue website (via plugin or iframe API)
+* 🔌 React/Vue plugin via iframe
+* 🎓 LMS extension (Teachable, Moodle, Canvas)
+* 📘 School portals
+* 📚 Edtech dashboards
 
-To integrate:
-- Use the `/upload`, `/quiz`, `/generate` endpoints
-- Provide book file + auth token (optional)
-- Use REST or embed as iframe frontend
+**Integration Steps:**
 
----
+* Use backend endpoints:
 
-## 📈 Market Potential & Monetization
-
-- **Target Users**: Schools, Coaching Centers, Edtech Apps, Universities
-- **Pricing Model**:
-  - Free Tier: 2 books/month
-  - Pro Tier: ₹299/month (10 books, analytics)
-  - Enterprise Tier: ₹999/month (unlimited + team)
-- **AI Token Cost**: ₹0.002/question via Gemini API (~₹0.80 per quiz)
-- **Hosting Cost**: Free on Vercel/Netlify (Frontend), Supabase free tier covers 500MB DB + 2GB Storage
+  * `/api/upload`
+  * `/api/generate-questions`
+  * `/api/quiz/start`
+* Embed UI via iframe or use REST API
 
 ---
 
-## 🚀 Deployment Instructions
+## 💰 Monetization & Market Scope
 
-### 🔹 Frontend (React) on Vercel/Netlify
+| Plan       | Price   | Description                       |
+| ---------- | ------- | --------------------------------- |
+| Free       | ₹0/mo   | 2 books, limited quizzes          |
+| Pro        | ₹299/mo | 10 books, quiz reports, analytics |
+| Enterprise | ₹999/mo | Unlimited, team access, API keys  |
+
+* 🔥 **Target**: Schools, Coaching, Publishers, Edtech Startups
+* 💡 **AI Cost**: \~₹0.002/question via Gemini 1.5 Flash
+* 💸 **Infra Cost**: Supabase Free Tier + Vercel Netlify (Free)
+
+---
+
+## ⚙️ Deployment
+
+### 🔹 Frontend (React) on Vercel
+
 ```bash
 cd frontend
 npm install
 npm run build
-# Connect to Vercel/Netlify and deploy the build folder
-````
+# Connect to Vercel and deploy the `build/` folder
+```
 
-### 🔸 Backend (Express) on Railway/Render
+### 🔸 Backend (Express) on Railway
 
 ```bash
 cd backend
 npm install
-# Add .env (with Supabase + Gemini keys)
+# Add .env with:
+# SUPABASE_URL, SUPABASE_KEY, GEMINI_API_KEY, PORT
 node server.js
 ```
 
 ---
 
-## 🌍 Environment Variables
+## 🔐 Environment Variables
 
-```env
+```
 SUPABASE_URL=your_supabase_url
 SUPABASE_KEY=your_service_role_key
-GEMINI_API_KEY=your_gemini_api_key
+GEMINI_API_KEY=your_gemini_key
 PORT=5000
 ```
 
 ---
 
-## 💡 Ideas for Improvement
+## 💡 Future Ideas
 
-* Add user auth (Supabase/Auth0)
-* Explanation for each question
-* Auto-assign topic based on AI categorization
-* Leaderboards / Gamification
-* Mobile App (React Native)
-* Multilingual Support
+* Supabase Auth Integration
+* Multilingual Quiz Support
+* Bookmark Difficult Questions
+* AI Explanation Generator
+* Admin Dashboard for Educators
+* Export to Google Classroom
 
 ---
 
-## 🧠 Author & Contributions
+## 👨‍💻 Author & Maintainer
 
-**Developed by [Santhosh-Billionaire](https://github.com/Santhosh-Billionaire)**
-For contributions, feature requests, or collaborations — feel free to open issues or PRs.
+Built by [Santhosh-Billionaire](https://github.com/Santhosh-Billionaire)
+For collabs, issues or PRs — welcome 🙌
 
 ---
 
 ## 📜 License
 
-This project is open-sourced under the **MIT License**.
+Licensed under **MIT** — use it freely, with ❤️
+
+> “Turn your content into learning. Smarter, faster, AI-driven.”
 
 ---
-
-> **Empower learning with AI. Build smarter quizzes from the content you love.**
-
-```
-
----
-
-Would you like a PDF version of this `README` too? I can convert it for distribution or presentations.
-```

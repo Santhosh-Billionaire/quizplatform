@@ -12,29 +12,34 @@
 
 ### 📥 Upload Book
 
-![Upload Book](./frontend/public/screenshots/upload-book.png)
+![Upload Book]<img width="935" height="923" alt="image" src="https://github.com/user-attachments/assets/f05c538a-e16a-4722-82a5-537a07a328db" />
+
 
 ### ⚙️ Quiz Setup
 
-![Quiz Setup](./frontend/public/screenshots/quiz-setup.png)
+![Quiz Setup]<img width="935" height="571" alt="image" src="https://github.com/user-attachments/assets/74e71633-6890-4a4c-a07b-51ce30d7f1d2" />
+
 
 ### 🔢 Difficulty & Time Settings
 
-![Difficulty Selection](./frontend/public/screenshots/difficulty-setting.png)
+![Difficulty Selection]<img width="936" height="911" alt="image" src="https://github.com/user-attachments/assets/7b31b24a-abab-4643-ac02-8f7e03fb5610" />
+
 
 ### 🧪 Live Quiz
 
-![Question UI](./frontend/public/screenshots/question-ui.png)
+![Question UI]<img width="1040" height="761" alt="Screenshot 2025-07-14 101627" src="https://github.com/user-attachments/assets/14b1c2e0-c680-4335-9664-9501c50ca8bf" />
 
 ### 📊 Quiz Results
 
-![Result UI](./frontend/public/screenshots/result-ui.png)
+![Result UI] <img width="1208" height="905" alt="Screenshot 2025-07-14 103044" src="https://github.com/user-attachments/assets/2793e916-abd5-4e42-81e9-27c09174c512" />
+
 
 ---
 
 ## 🚀 Features
 
 * 📚 Upload PDFs and extract content
+
 * 🤖 Gemini Pro AI generates MCQs from context
 * 🧠 Topic-wise grouping & difficulty control
 * ⚙️ Quiz setup: topic, time, difficulty
